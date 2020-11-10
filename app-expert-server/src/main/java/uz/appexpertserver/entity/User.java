@@ -1,7 +1,9 @@
 package uz.appexpertserver.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import uz.appexpertserver.entity.enums.PersonType;
@@ -15,7 +17,9 @@ import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity(name = "users")
 public class User extends AbsEntity implements UserDetails {
 
     @Column(nullable = false)
@@ -45,6 +49,11 @@ public class User extends AbsEntity implements UserDetails {
     @ManyToMany
     private Set<Role> roles;
 
+    private boolean accountNonExpired = true;
+    private boolean accountNonLocked = true;
+    private boolean credentialsNonExpired = true;
+    private boolean enabled;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
@@ -57,21 +66,21 @@ public class User extends AbsEntity implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return accountNonExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return accountNonLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return credentialsNonExpired;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return enabled;
     }
 }

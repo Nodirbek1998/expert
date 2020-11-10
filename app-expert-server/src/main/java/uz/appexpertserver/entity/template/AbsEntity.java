@@ -18,7 +18,7 @@ public abstract class AbsEntity {
     @Id
     @Type(type = "org.hibernate.type.PostgresUUIDType")
     @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2",strategy = "org.hibernate.UUIDGenerator")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
     @CreationTimestamp
