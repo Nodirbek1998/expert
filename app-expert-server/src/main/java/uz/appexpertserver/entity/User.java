@@ -54,6 +54,20 @@ public class User extends AbsEntity implements UserDetails {
     private boolean credentialsNonExpired = true;
     private boolean enabled;
 
+    public User(String firstName, String lastName, String middleName,
+                String phoneNumber, String password, String tin,
+                String email, PersonType personType, Set<Role> roles) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName = middleName;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        this.tin = tin;
+        this.email = email;
+        this.personType = personType;
+        this.roles = roles;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
